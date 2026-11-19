@@ -1,45 +1,58 @@
 # myBI Starter
 
-myBI 的集成示例仓库（[Apache-2.0](./LICENSE)）。
+myBI 的公开入口：集成示例 + **社区版安装包下载**。
 
-这里只有建库脚本、示例数据、部署骨架和嵌入样例，**没有**引擎源码。引擎是单独的商业产品；社区安装包或商业授权请从产品渠道获取。
+- 本仓库里的脚本 / 文档：Apache-2.0  
+- 社区版二进制（可运行）：见右侧 **[Releases](https://github.com/dahaoqiu/mybi-starter/releases)**，不含源码  
 
-类似「产品本体私有、示例公开」的拆法，和不少国产交付型工具一样：先让你把库和 SQL 跑通，再决定要不要上引擎。
+引擎源码在私有仓；社区版可长期自用，须保留 myBI 品牌。白标、嵌入等需商业授权。
 
-## 有什么
+## 先跑起来（社区版）
 
-| 目录 | 内容 |
-|---|---|
-| `schema/` | 中间库参考表结构 |
-| `examples/` | 示例数据 / SQL |
-| `deploy/` | 部署与检查脚本 |
-| `docs/` | 部署、参数说明 |
-| `client/` | 简单 iframe 嵌入页 |
+1. 打开 [Releases](https://github.com/dahaoqiu/mybi-starter/releases)，下载 `mybi-community-1.0.0.zip`
+2. 解压，机器需 **JDK 17**
+3. 安装：
 
-## 怎么用
+```powershell
+# Windows
+.\preflight.ps1
+.\install.ps1
+```
 
 ```bash
-git clone https://github.com/dahaoqiu/mybi-starter.git
-cd mybi-starter
-# 按 docs 建库、导 examples，再用 myBI 引擎连上该库
+# Linux / macOS
+chmod +x *.sh
+./preflight.sh
+./install.sh
 ```
+
+浏览器打开提示的地址。默认账号 `admin` / `admin123`，装完先改密码。
+
+业务库在系统里自己配（MySQL / SQL Server 等）。元数据默认用包内 SQLite。
+
+## 本仓库还有什么
+
+| 目录 | 用途 |
+|---|---|
+| `schema/` | 中间库参考表结构（可选） |
+| `examples/` | 示例数据 / SQL（可选） |
+| `deploy/` | 部署脚本参考 |
+| `docs/` | 参数语法、部署说明 |
+| `client/` | iframe 嵌入最小示例 |
+
+这些材料方便你建库、写 SQL、对接；**单独 clone 本仓没有引擎 jar，跑不了系统**——请用上面的 Release 包。
 
 参数常见写法：`${name}`、`${name:like}`、`${name:in}`、`/*IF name*/ ... /*END*/`。
 
-## 和引擎的关系
+## 版本说明
 
-| | 本仓库 | myBI 引擎 |
-|---|---|---|
-| 内容 | 脚本与文档 | 设计器、导出、权限、AI 等 |
-| 许可 | Apache-2.0 | 商业授权 / 社区二进制条款 |
-| 能否当产品用 | 不能单独当报表系统 | 可以 |
+| | 说明 |
+|---|---|
+| 社区版（Release 包） | 可部署自用，含主功能与 AI 入口；保留品牌 |
+| 专业版 / OEM | 白标、嵌入、权限增强等，需授权 |
 
-本仓里的文件可以按 Apache-2.0 商用（例如参考 `schema/` 建自己的库）。这不等于可以免费使用或转售引擎。品牌与 Logo 见 [TRADEMARKS.md](./TRADEMARKS.md)。
+更多说明：`COMMUNITY-EDITION.md`、`PROJECT-INTRO.md`。品牌规则：`TRADEMARKS.md`。
 
-## 授权与联系
+## 联系
 
-社区版可自用（保留品牌）。白标、嵌入、OEM 等需要商业授权。
-
-邮箱 / 微信：待填写。
-
-更完整的产品介绍见 [PROJECT-INTRO.md](./PROJECT-INTRO.md)（若仓库中已同步）。
+商务邮箱 / 微信：待填写。
