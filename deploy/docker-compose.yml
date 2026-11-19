@@ -1,0 +1,21 @@
+# myBI 默认交付：单容器 + 宿主机挂载 data/conf
+# 元库默认 SQLite；不捆绑 MySQL。
+services:
+  mybi:
+    image: eclipse-temurin:17-jre
+    container_name: mybi
+    working_dir: /opt/mybi
+    command: ["java", "-jar", "/opt/mybi/backend.jar", "--spring.profiles.active=sqlite"]
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend.jar:/opt/mybi/backend.jar:ro
+      - ./web:/opt/mybi/web:ro
+      - ./data:/opt/mybi/data
+      - ./conf:/opt/mybi/conf
+      - ./logs:/opt/mybi/logs
+    environment:
+      SPRING_PROFILES_ACTIVE: sqlite
+      MYBI_DATA_DIR: /opt/mybi/data
+      JAVA_TOOL_OPTIONS: "-Xms256m -Xmx1024m"
+    restart: unless-stopped

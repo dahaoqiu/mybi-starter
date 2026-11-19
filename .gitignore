@@ -1,0 +1,51 @@
+# .gitignore（发布用模板）
+
+# 构建产物
+target/
+dist/
+build/
+*.class
+*.jar
+!backend/lib/*.jar
+
+# 依赖
+node_modules/
+.pnpm-store/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# 运行期数据与密钥（绝不入库）
+data/
+license/
+license.json
+*.db
+*.db-shm
+*.db-wal
+*.log
+logs/
+backup/
+*.pem
+*.key
+*.p12
+*.jks
+.env
+.env.*
+application-local.yml
+application-local.yaml
+
+# 系统
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 内部文档与测试（不要公开）
+projectDoc/
+test/
+shots/
+scripts/verify-release.ps1
+releases/

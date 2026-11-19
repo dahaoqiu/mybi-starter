@@ -1,0 +1,17 @@
+myBI 集成示例（mybi-starter）
+Copyright (c) 2026 <你的公司名>
+
+本仓库包含以下原创内容，按 Apache License 2.0 授权：
+  - schema/     中间库建表脚本（零售 / 制造）
+  - examples/   示例数据集 SQL
+  - deploy/     docker-compose、preflight 自检、安装脚本
+  - docs/       部署手册、参数语法速查、升级说明
+  - client/     嵌入示例（iframe + token）
+
+说明：
+  本仓库**不包含** myBI 引擎本体（后端、前端、调度、权限、白标等实现）。
+  引擎为商业软件，需另行取得商业授权。
+
+第三方：
+  deploy/ 中的脚本未捆绑第三方运行库；运行时若使用 MySQL/MariaDB 客户端，
+  请遵守其各自许可（MariaDB Connector/J 为 LGPL-2.1）。

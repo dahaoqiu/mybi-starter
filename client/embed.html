@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>myBI 嵌入示例（iframe + token）</title>
+  <style>
+    body { font-family: -apple-system, "Microsoft YaHei", sans-serif; margin: 24px; color: #111827; }
+    .bar { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+    input { padding: 6px 8px; border: 1px solid #d1d5db; border-radius: 4px; width: 320px; }
+    button { padding: 6px 14px; border: 0; border-radius: 4px; background: #2F5597; color: #fff; cursor: pointer; }
+    iframe { width: 100%; height: 720px; border: 1px solid #e5e7eb; border-radius: 6px; background: #fff; }
+    code { background: #f3f4f6; padding: 1px 4px; border-radius: 3px; }
+    .hint { color: #6b7280; font-size: 13px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h3>myBI 嵌入示例</h3>
+  <div class="bar">
+    <span>报表 ID：</span><input id="rid" value="1" />
+    <span>嵌入 token：</span><input id="tok" placeholder="由后端用密钥签发" />
+    <button onclick="openEmbed()">打开</button>
+  </div>
+  <iframe id="frame" src="about:blank"></iframe>
+  <p class="hint">
+    规则：<code>iframe</code> 只允许 <code>frame-ancestors</code> 白名单内的域名嵌入；
+    token 绑定 <code>rid</code> + <code>uid</code>，默认 30 分钟过期，过期返回 E4001。
+  </p>
+
+  <script>
+    // 示例：由你的后端签出 token（HMAC-SHA256 over {rid,uid,exp}），前端只负责拼 URL。
+    // 生产环境不要把签名密钥放在浏览器里。
+    function openEmbed() {
+      const rid = document.getElementById('rid').value.trim()
+      const token = document.getElementById('tok').value.trim()
+      const base = localStorage.getItem('mybi.base') || 'http://localhost:8080'
+      document.getElementById('frame').src =
+        `${base}/embed/report/${encodeURIComponent(rid)}?token=${encodeURIComponent(token)}&hideHeader=1`
+    }
+  </script>
+</body>
+</html>
